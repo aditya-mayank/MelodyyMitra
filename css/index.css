@@ -135,7 +135,7 @@ nav ul li a:hover::after {
 /* Hero Section */
 #hero {
     height: 100vh;
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1400/900'), url(./image/Core.jpg) center/cover no-repeat;
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1400/900'), url(../image/Core.jpg) center/cover no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -356,7 +356,7 @@ nav ul li a:hover::after {
 /* Call to Action */
 #cta {
     padding: 100px 0;
-    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/api/placeholder/1400/600'), url(./image/gp3re.jpg) center/cover no-repeat fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url('/api/placeholder/1400/600'), url(../image/gp3re.jpg) center/cover no-repeat fixed;
     text-align: center;
 }
 
