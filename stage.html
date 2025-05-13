@@ -1,13 +1,764 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Live performance</title>
-    <link rel="stylesheet" href="./css/stage.css">
+    <title>Melodyy Mitra - Performances</title>
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background-color: #121212;
+            color: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            padding: 20px 0;
+            background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            transition: all 0.3s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            width: 130px;
+            margin-right: 40px;
+        }
+
+        .logo-placeholder {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #ff7b25, #ff2e63);
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 15px rgba(255, 46, 99, 0.6);
+        }
+
+        .logo-placeholder i {
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .band-name {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #ff7b25, #ff2e63);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        nav ul li a {
+            color: #f5f5f5;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            padding: 8px 0;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            color: #ff2e63;
+        }
+
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(45deg, #ff7b25, #ff2e63);
+            transition: width 0.3s ease;
+        }
+
+        nav ul li a:hover::after {
+            width: 100%;
+        }
+
+        .active::after {
+            width: 100%;
+        }
+
+        .mobile-menu {
+            display: none;
+            cursor: pointer;
+        }
+
+        .bar {
+            width: 25px;
+            height: 3px;
+            background-color: #fff;
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* Page Header */
+        .page-header {
+            height: 50vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('/api/placeholder/1400/500') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .page-title {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 3px;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .page-subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.6;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section Styles */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(45deg, #ff7b25, #ff2e63);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            margin-bottom: 50px;
+            color: #cccccc;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Upcoming Performances Section */
+        #upcoming {
+            background-color: #0c0c0c;
+        }
+
+        .upcoming-container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .upcoming-banner {
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .upcoming-banner img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .upcoming-info {
+            background: rgba(18, 18, 18, 0.95);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .upcoming-info h3 {
+            color: #ff2e63;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .event-details {
+            margin: 20px 0;
+        }
+
+        .event-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .event-detail i {
+            color: #ff7b25;
+            font-size: 18px;
+            margin-right: 15px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .event-detail span {
+            color: #f5f5f5;
+            font-size: 1.1rem;
+        }
+
+        .upcoming-description {
+            color: #cccccc;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #ff7b25, #ff2e63);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            box-shadow: 0 5px 15px rgba(255, 46, 99, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 46, 99, 0.6);
+        }
+
+        .no-events {
+            text-align: center;
+            padding: 40px;
+            background: rgba(18, 18, 18, 0.95);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .no-events i {
+            font-size: 50px;
+            color: #ff2e63;
+            margin-bottom: 20px;
+        }
+
+        .no-events h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .no-events p {
+            color: #cccccc;
+            max-width: 500px;
+            margin: 0 auto 20px;
+        }
+
+        /* Past Shows Section */
+        #past-shows {
+            background-color: #121212;
+        }
+
+        .past-show {
+            display: flex;
+            align-items: center;
+            margin-bottom: 60px;
+            background: rgba(12, 12, 12, 0.7);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .past-show-img {
+            flex: 1;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .past-show-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .past-show:hover .past-show-img img {
+            transform: scale(1.05);
+        }
+
+        .past-show-content {
+            flex: 1;
+            padding: 30px;
+        }
+
+        .past-show-date {
+            font-size: 0.9rem;
+            color: #ff7b25;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .past-show-title {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: #f5f5f5;
+        }
+
+        .past-show-description {
+            color: #cccccc;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .past-show-link {
+            color: #ff2e63;
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .past-show-link i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .past-show-link:hover {
+            color: #ff7b25;
+        }
+
+        .past-show-link:hover i {
+            transform: translateX(5px);
+        }
+
+        /* Reverse layout for even items */
+        .past-show:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0c0c0c;
+            padding: 60px 0 30px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: linear-gradient(45deg, #ff7b25, #ff2e63);
+        }
+
+        .footer-col p {
+            margin-bottom: 15px;
+            color: #aaa;
+            line-height: 1.6;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #242424;
+            color: #fff;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: linear-gradient(45deg, #ff7b25, #ff2e63);
+            transform: translateY(-5px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #242424;
+            color: #aaa;
+        }
+
+        /* Responsive */
+        @media (max-width: 992px) {
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .past-show {
+                flex-direction: column !important;
+            }
+
+            .past-show-img {
+                width: 100%;
+                height: 200px;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 80px;
+                left: -100%;
+                background-color: rgba(0, 0, 0, 0.95);
+                width: 100%;
+                flex-direction: column;
+                align-items: center;
+                padding: 50px 0;
+                transition: all 0.5s ease;
+                z-index: 99;
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            nav ul li {
+                margin: 15px 0;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .fade-in.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .page-content {
+            animation: fadeIn 1s ease;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
-   <h2> This page is under development and  it will be ready soon...<br><br>Till then explore other sections of the website. <br>Thank You</h2> 
-    
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container nav-container">
+            <div class="logo">
+                <div class="logo-placeholder">
+                    <img src="./Photots/logo2.jpg" alt="" class="logo">
+                </div>
+                <h1 class="band-name">Melodyy Mitra</h1>
+            </div>
+            <nav>
+                <ul id="navMenu">
+                    <li><a href="index1.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="stage.html" class="active">Performances</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <div class="mobile-menu" id="mobileMenuBtn">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <div class="page-content">
+                <h1 class="page-title">Our Performances</h1>
+                <p class="page-subtitle">Experience the fusion of engineering precision and musical passion through our live performances.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Upcoming Performances Section -->
+    <section id="upcoming">
+        <div class="container">
+            <h2 class="section-title fade-in">Upcoming Performances</h2>
+            <p class="section-subtitle fade-in">Catch us live and feel the energy of our music firsthand.</p>
+
+            <div class="upcoming-container fade-in">
+                <!-- Uncomment and modify this section when you have an upcoming performance -->
+                
+                <!-- <div class="upcoming-banner">  -->
+                    <!-- <img src="/api/placeholder/900/400" alt="Upcoming Performance Banner"> -->
+                <!-- </div> -->
+                <!-- <div class="upcoming-info"> -->
+                    <!-- <h3>Acoustic Night at Tech Fest 2025</h3> -->
+                    <!-- <div class="event-details"> -->
+                        <!-- <div class="event-detail"> -->
+                            <!-- <i class="fas fa-calendar-alt"></i> -->
+                            <!-- <span>May 20, 2025</span> -->
+                        <!-- </div> -->
+                        <!-- <div class="event-detail"> -->
+                            <!-- <i class="fas fa-clock"></i> -->
+                            <!-- <span>7:00 PM - 9:30 PM</span> -->
+                        <!-- </div> -->
+                        <!-- <div class="event-detail"> -->
+                            <!-- <i class="fas fa-map-marker-alt"></i> -->
+                            <!-- <span>Open Auditorium, NIT Warangal</span> -->
+                        <!-- </div> -->
+                    <!-- </div> -->
+                    <!-- <p class="upcoming-description"> -->
+                        <!-- Join us for an enchanting evening of acoustic melodies as part of the annual Tech Fest celebrations.  -->
+                        <!-- We'll be performing a mix of our classic covers and some exciting new arrangements.  -->
+                        <!-- This is a free entry event open to all students and faculty members. -->
+                    <!-- </p> -->
+                    <!-- <a href="#" class="cta-btn">Add to Calendar</a> -->
+                <!-- </div> -->
+               
+
+                <!-- No Events Message - Remove this when you have an upcoming event -->
+                <div class="no-events">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3>No Upcoming Performances Currently Scheduled</h3>
+                    <p>We're currently working on new material and planning our next performances. Follow us on social media for announcements!</p>
+                    <a href="https://www.instagram.com/melodyy_mitra/?utm_source=ig_web_button_share_sheet" class="cta-btn">Stay Connected</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Past Shows Section -->
+    <section id="past-shows">
+        <div class="container">
+            <h2 class="section-title fade-in">Past Performances</h2>
+            <p class="section-subtitle fade-in">Relive some of our most memorable performances from the past.</p>
+
+            <div class="past-shows-container">
+                <!-- Past Show 1 -->
+                <div class="past-show fade-in">
+                    <div class="past-show-img">
+                        <img src="./Photots/gp2.jpg" alt="HLDC 2025">
+                    </div>
+                    <div class="past-show-content">
+                        <span class="past-show-date">March 1, 2025</span>
+                        <h3 class="past-show-title">Open Mic, HLDC</h3>
+                        <p class="past-show-description">
+                            Our performance at the Open Mic, HLDC was a blend of acoustic classics and contemporary hits. 
+                            The audience joined us in singing along to familiar tunes, creating an atmosphere of community and musical joy. 
+                            We premiered our Mashup of <span style="color: #ff2e63;">  Sun raha hai x Chahu mai ya na x Mai agar kahu x Meri mehbooba</span> which received tremendous applause.
+                        </p>
+                        <!-- <a href="#" class="past-show-link">View Highlights <i class="fas fa-arrow-right"></i></a> -->
+                    </div>
+                </div>
+
+                <!-- Past Show 2 -->
+                <div class="past-show fade-in">
+                    <div class="past-show-img">
+                        <img src="./Photots/gp6.jpg"  alt="Music Festival">
+                        
+                    </div>
+                    <div class="past-show-content">
+                        <span class="past-show-date">February 16, 2025</span>
+                        <h3 class="past-show-title">Cura Tarang</h3>
+                        <p class="past-show-description">
+                           This was the first stage show of Melodyy Mitra in which Anish & Ayush did the great job . This event was organized by the Department of Management Studies, NIT Warangal. Over 100 participated from all across India in different events of CURA'25 and among them we got 2nd position in music competition. 
+                        </p>
+                        <p class="past-show-description">
+                            We performed <span style="color: #ff2e63;">Tum se hi X ek ajnabi haseena se</span> which made the audience sing along and vibe with joy. After this first ever stage show, we gained a lot of confidence and also learnt and gained experience for the next upcoming shows. 
+                        </p>
+                        <p class="past-show-description">
+                            After this event, many people including professors and other students which madde us feel proud.
+                        </p>
+                       
+                    </div>
+                </div>
+
+                <!-- Past Show 3 -->
+                <!-- <div class="past-show fade-in"> -->
+                    <!-- <div class="past-show-img"> -->
+                        <!-- <img src="./Photots/gp6.jpg" alt="Charity Concert"> -->
+                    <!-- </div> -->
+                    <!-- <div class="past-show-content"> -->
+                        <!-- <span class="past-show-date">August 5, 2023</span> -->
+                        <!-- <h3 class="past-show-title">Charity Fundraiser Concert</h3> -->
+                        <!-- <p class="past-show-description"> -->
+                            <!-- We participated in a charity fundraiser concert to support educational initiatives for underprivileged  -->
+                            <!-- children. The event raised over ₹1,50,000 for providing STEM education resources. Our performance  -->
+                            <!-- focused on inspirational pieces that resonated with the cause. -->
+                        <!-- </p> -->
+                        <!-- <a href="#" class="past-show-link">View Highlights <i class="fas fa-arrow-right"></i></a> -->
+                    <!-- </div> -->
+                <!-- </div> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Melodyy Mitra</h3>
+                    <p>
+                        Follow our musical journey of soulful covers, creative compositions, and instrumental magic.
+                    </p>
+                    <div class="social-links">
+                        <a href="https://www.instagram.com/melodyy_mitra?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@melodyymitra?si=T5nO-Nd-yU8KfRO7"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <p><a href="index1.html" style="color: #aaa; text-decoration: none;">Home</a></p>
+                    <p><a href="about.html" style="color: #aaa; text-decoration: none;">About Us</a></p>
+                    <p><a href="stage.html" style="color: #aaa; text-decoration: none;">Performances</a></p>
+                    <p><a href="contact.html" style="color: #aaa; text-decoration: none;">Contact</a></p>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-envelope"></i> melodyymitra@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i> NIT Warangal</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Melodyy Mitra. All Rights Reserved.<br>Website developed by - Aditya Mayank & Ayush Singh</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.getElementById('navMenu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+            mobileMenuBtn.classList.toggle('active');
+        });
+
+        // Scroll Events
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            header.classList.toggle('scrolled', window.scrollY > 50);
+
+            // Reveal animations on scroll
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+
+                if (elementPosition < screenPosition) {
+                    element.classList.add('active');
+                }
+            });
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Trigger scroll once to check for elements in view on load
+            window.dispatchEvent(new Event('scroll'));
+        });
+    </script>
 </body>
+
 </html>
