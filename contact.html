@@ -90,7 +90,7 @@
                         <input type="hidden" name="_captcha" value="false">
                         
                         <!-- Success page after submission -->
-                        <!-- <input type="hidden" name="_next" value="https://yourwebsite.com/thanks.html"> -->
+                        <input type="hidden" name="_next" value="https://aditya-mayank.github.io/MelodyyMitra/thanks.html">
                         
                         <div class="form-group">
                             <input type="text" name="name" class="form-control" placeholder="Your Name" required>
@@ -188,7 +188,7 @@
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
     if (contactForm) {
-        // contactForm.addEventListener('submit', function(e) {
+        contactForm.addEventListener('submit', function(e) {
             // e.preventDefault(); // prevent actual submission for demonstration/testing
 
             const allFieldsFilled = Array.from(contactForm.querySelectorAll('[required]')).every(
@@ -216,7 +216,7 @@
     document.addEventListener('DOMContentLoaded', () => {
         // Trigger scroll once to check for elements in view on load
         window.dispatchEvent(new Event('scroll'));
-    });
+    }});
 </script>
    
 </body>
