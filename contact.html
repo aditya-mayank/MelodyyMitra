@@ -189,7 +189,7 @@
     const formMessage = document.getElementById('formMessage');
     if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
-            e.preventDefault(); // prevent actual submission for demonstration/testing
+            // e.preventDefault(); // prevent actual submission for demonstration/testing
 
             const allFieldsFilled = Array.from(contactForm.querySelectorAll('[required]')).every(
                 field => field.value.trim() !== ''
