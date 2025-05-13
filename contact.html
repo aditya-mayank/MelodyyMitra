@@ -190,11 +190,12 @@
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
     if (contactForm) {
-        // contactForm.addEventListener('submit', function(e) {
-            // e.preventDefault(); // prevent actual submission for demonstration/testing
+        contactForm.addEventListener('submit', function(e) {
+            e.preventDefault(); // prevent actual submission for demonstration/testing
 
             const allFieldsFilled = Array.from(contactForm.querySelectorAll('[required]')).every(
-                field => field.value.trim() !== '');
+                field => field.value.trim() !== ''
+            );
 
             if (allFieldsFilled) {
                 // Show success message
@@ -211,7 +212,7 @@
                 formMessage.classList.remove('success');
                 formMessage.classList.add('error'); // optional class for error styling
             }
-        );
+        });
     }
 
     // Initialize
@@ -223,4 +224,4 @@
 
 </body>
 
-</html>   
+</html>  Message is sent successfully but it is not received on my mail. check the error
