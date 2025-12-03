@@ -41,37 +41,31 @@ header.scrolled {
 }
 
 .logo {
-    display: flex;
-    align-items: center;
-    width: 100px;
-    margin-right: 40px;
-
-    /* padding: 25px; */
-
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: -9px 30px -9px 20px;
 }
 
 .logo-placeholder {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background: linear-gradient(45deg, #ff7b25, #ff2e63);
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 0 15px rgba(255, 46, 99, 0.6);
-}
-
-.logo-placeholder i {
-    color: #fff;
-    font-size: 24px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(45deg, #ff7b25, #ff2e63);
 }
 
 .im {
-    border-radius: 50%;
-    height: 105px;
-    margin: 25px;
-    padding-right: 30px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 0;
+  margin: 0;
+  display: block;
 }
 
 .band-name {
@@ -82,6 +76,7 @@ header.scrolled {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 1px;
+    margin-left: 10px;
 }
 
 nav ul {
