@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Contact Us - Melodyy Mitra</title>
   <link rel="stylesheet" href="./css/contact.css">
+  <link rel="icon" type="image/png" href="./image/logo3.jpg">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+    rel="stylesheet">
 </head>
+
 <body>
   <!-- Header & Navigation -->
   <header>
@@ -38,7 +42,8 @@
   <section class="page-header">
     <div class="container">
       <h1 class="page-title fade-in">Get In Touch</h1>
-      <p class="page-subtitle fade-in">We'd love to hear from you! Share your thoughts, suggestions, or just drop us a message.</p>
+      <p class="page-subtitle fade-in">We'd love to hear from you! Share your thoughts, suggestions, or just drop us a
+        message.</p>
     </div>
   </section>
 
@@ -67,7 +72,9 @@
             </div>
           </div>
           <div class="social-links">
-            <a href="https://www.instagram.com/melodyy_mitra?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+            <a
+              href="https://www.instagram.com/melodyy_mitra?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i
+                class="fab fa-instagram"></i></a>
             <a href="http://www.youtube.com/@MelodyyMitra"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
@@ -109,9 +116,12 @@
       <div class="footer-content">
         <div class="footer-col">
           <h3>Melodyy Mitra</h3>
-          <p>Where engineering meets music, creating harmonies that resonate with the soul and technical precision that dazzles the mind.</p>
+          <p>Where engineering meets music, creating harmonies that resonate with the soul and technical precision that
+            dazzles the mind.</p>
           <div class="social-links">
-            <a href="https://www.instagram.com/melodyy_mitra?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i class="fab fa-instagram"></i></a>
+            <a
+              href="https://www.instagram.com/melodyy_mitra?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><i
+                class="fab fa-instagram"></i></a>
             <a href="http://www.youtube.com/@MelodyyMitra"><i class="fab fa-youtube"></i></a>
           </div>
         </div>
@@ -158,7 +168,7 @@
     const contactForm = document.getElementById('contactForm');
     const formMessage = document.getElementById('formMessage');
 
-    contactForm.addEventListener('submit', function(e) {
+    contactForm.addEventListener('submit', function (e) {
       e.preventDefault(); // stop redirect :contentReference[oaicite:0]{index=0}
       const allFilled = Array.from(this.querySelectorAll('[required]')).every(f => f.value.trim() !== '');
       if (!allFilled) {
@@ -192,4 +202,5 @@
     });
   </script>
 </body>
+
 </html>
