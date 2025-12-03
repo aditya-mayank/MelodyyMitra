@@ -41,28 +41,28 @@ header.scrolled {
 }
 
 .logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  margin: -9px 30px -9px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: -9px 30px -9px 20px;
 }
 
 .logo-placeholder {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;                
-  background: linear-gradient(45deg, #ff7b25, #ff2e63);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    overflow: hidden;
+    background: linear-gradient(45deg, #ff7b25, #ff2e63);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .logo-in-placeholder {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
 }
 
 .band-name {
@@ -513,8 +513,62 @@ footer {
     }
 
     .logo {
-        margin-left: 20px;
+        margin: 0 0 0 10px;
+        gap: 8px;
+        align-items: center;
     }
+
+    .logo-placeholder {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        overflow: hidden;
+        background: linear-gradient(45deg, #ff7b25, #ff2e63);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        margin: 0;
+        /* ensure no external margins push/scale it */
+        padding: 0;
+    }
+
+    /* cover any selector you may be using for the img (.im or generic img) */
+    .logo-placeholder img,
+    .logo-placeholder .im,
+    .im {
+        width: 100% !important;
+        height: 100% !important;
+        object-fit: cover;
+        display: block;
+        margin: 0 !important;
+        padding: 0 !important;
+        border-radius: 50%;
+        box-shadow: none;
+    }
+
+    .band-name {
+        font-size: 22px;
+        letter-spacing: 0.5px;
+        line-height: 1;
+        margin-left: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+  .logo {
+    margin-left: 8px;
+    gap: 6px;
+  }
+
+  .logo-placeholder {
+    width: 50px;
+    height: 50px;
+  }
+
+  .band-name {
+    font-size: 20px;
+  }
 }
 
 /* Animations */
